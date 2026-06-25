@@ -82,23 +82,4 @@ python test_cases.py
 
 All 5 public sample cases should print `PASS`.
 
-## Deployment (Render — recommended)
 
-1. Push this repo to GitHub (public).
-2. On [render.com](https://render.com) → **New → Web Service** → connect the repo.
-3. Render auto-detects `render.yaml`. If asked manually:
-   - **Build command:** `pip install -r requirements.txt`
-   - **Start command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
-   - **Health check path:** `/health`
-4. Deploy. You get an HTTPS URL like `https://queuestorm-ticket-sorter.onrender.com`.
-5. Verify: open `https://YOUR-URL/health`.
-
-### Railway / Fly / other
-
-A `Procfile` is included (`web: uvicorn main:app --host 0.0.0.0 --port $PORT`), which Railway and most PaaS platforms read automatically. Ensure the platform injects a `$PORT` environment variable (all listed platforms do).
-
-## Notes
-
-- **No secrets** are used or stored. If you later add an LLM, put the key in an environment variable, never in the repo.
-- **No GPU** required.
-- Cold starts on free tiers can take a few seconds; both endpoints respond well within the required limits once warm. Hitting `/health` after deploy warms the instance.
